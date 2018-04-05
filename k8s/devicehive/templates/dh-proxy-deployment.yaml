@@ -33,6 +33,10 @@ spec:
           periodSeconds: 3
         resources:
 {{ toYaml .Values.proxy.resources | indent 10 }}
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+    {{- end }}
         volumeMounts:
         - name: api-gateway-locations-conf
           mountPath: /etc/nginx/location.d/api-gateway.conf
